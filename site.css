@@ -43,11 +43,16 @@
 /* Pre-launch button reads as a live ink "Copy" button, then tells the truth on hover:
    the label swaps to "Coming soon" and nothing is ever copied. Width is locked to the
    wider of the two labels so the box does not resize mid-hover. */
-.btn-soon{min-width:124px;min-height:44px;padding:0 18px;background:var(--ink);color:var(--surface);
+/* Both labels occupy the SAME grid cell, so the button reserves the width of the wider
+   one and each label centres on the identical box. Opacity alone would leave the hidden
+   label taking flex space and shove the visible one off-centre (it did: 17px right on
+   mobile, where the kit stacks .copybox-row to full width). Grid stacking avoids that
+   and needs no absolute positioning. */
+.btn-soon{min-height:44px;padding:0 18px;background:var(--ink);color:var(--surface);
   border:0;font-family:var(--mono);font-size:14px;cursor:not-allowed;
-  display:inline-flex;align-items:center;justify-content:center;position:relative}
-.btn-soon .lbl-copy,.btn-soon .lbl-soon{display:block;transition:opacity 120ms ease}
-.btn-soon .lbl-soon{position:absolute;opacity:0}
+  display:grid;place-items:center}
+.btn-soon .lbl-copy,.btn-soon .lbl-soon{grid-area:1/1;transition:opacity 120ms ease}
+.btn-soon .lbl-soon{opacity:0}
 .btn-soon:hover .lbl-copy,.btn-soon:focus-visible .lbl-copy{opacity:0}
 .btn-soon:hover .lbl-soon,.btn-soon:focus-visible .lbl-soon{opacity:1}
 /* Touch devices cannot hover, so they would never see the honest label.
@@ -55,7 +60,7 @@
    do not get the touch treatment. */
 @media (hover:none) and (pointer:coarse){
   .btn-soon .lbl-copy{opacity:0}
-  .btn-soon .lbl-soon{opacity:1;position:static}
+  .btn-soon .lbl-soon{opacity:1}
 }
 @media (prefers-reduced-motion:reduce){
   .btn-soon .lbl-copy,.btn-soon .lbl-soon{transition:none}
