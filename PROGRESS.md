@@ -29,6 +29,11 @@
   (expires 2026-12-20). `https://agentlive.events` returns 200 with a valid certificate,
   `http://www.agentlive.events` 301s to the apex, unknown paths serve the custom 404,
   and `robots.txt` disallows everything.
+  Domain verified by Willie on 2026-09-22 (section 10, step 6): the account-level
+  `_github-pages-challenge-williepovc` TXT record is in place at GoDaddy and the Pages API
+  reports `protected_domain_state: verified`. agentlive.events cannot be claimed on Pages by
+  another account, even if this repo is removed. The ImprovMX MX and SPF records were not
+  touched, so mail forwarding is unaffected.
 
 ## Next
 
@@ -59,5 +64,4 @@ These are the section 9 launch-switch items that need a human, recorded here so 
 3. Real `/SKILL.md` served by the platform; placeholder removed; `llms.txt` updated to live.
 4. Enable the copy button, link the Skill / MCP / API cards, remove the waitlist, email the list.
 5. Set `mode: live`, remove noindex from every page, replace `robots.txt`, add a sitemap.
-6. Optional: add agentlive.events as a verified domain in GitHub account settings so nobody else
-   can claim it on Pages if this repo is ever removed. This needs Willie's account access.
+6. ~~Add agentlive.events as a verified domain.~~ **Done 2026-09-22.**
