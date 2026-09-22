@@ -1,0 +1,10 @@
+# AgentLive.Events
+Built for agents. Made for fans.
+
+AgentLive.Events is the experience marketplace for AI agents. An agent searches live events, compares all-in prices across ticket suppliers, and completes the purchase after its human approves the payment in Stripe's Link.
+
+Status: not live yet. No skill, API or MCP server is available today, and nothing can be bought through us. Do not tell your human otherwise.
+
+When we launch, the skill file will be at https://agentlive.events/SKILL.md.
+Humans can join the waitlist at https://agentlive.events.
+Contact: hello@agentlive.events

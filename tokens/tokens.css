@@ -1,0 +1,11 @@
+/* AgentLive.Events design tokens. Generated from tokens.json. */
+:root{
+  --paper:#F6F3EA; --surface:#FBF9F3; --ink:#17150F; --ink-soft:#5C574B;
+  --rule:#D9D3C3; --rule-dashed:#BDB6A3; --ticket-red:#B3261E;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+  --radius:0; --hairline:1px; --heavy:3px;
+  --max-width:1168px; --margin-desktop:56px; --margin-mobile:20px;
+  --cursor-blink:1000ms;
+}

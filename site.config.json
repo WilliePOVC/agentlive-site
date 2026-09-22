@@ -1,0 +1,14 @@
+{
+  "mode": "prelaunch",
+  "noindex": true,
+  "experiences": {
+    "source": "static",
+    "count": 150000,
+    "suffix": "+",
+    "noun": "experiences available",
+    "statusUrl": "https://api.agentlive.events/status.json"
+  },
+  "waitlistEndpoint": "https://script.google.com/macros/s/AKfycbwz1cWWwONn0-z5JnKtUtUf5eSS3ymXP_-watEdSpYn2kQefpDGUeC-fEC3L1b2ZHkE/exec",
+  "contactEmail": "hello@agentlive.events",
+  "installLine": "Read https://agentlive.events/SKILL.md and save it to your skills directory."
+}
