@@ -39,14 +39,33 @@
 /* copy box, disabled pre-launch state */
 .copybox-text .prompt{color:var(--ink);margin-right:.5em}
 .copybox-text.soft-line{color:var(--ink-soft)}
-.btn-soon{min-width:96px;min-height:44px;padding:0 18px;background:var(--surface);color:var(--ink-soft);
-  border:0;border-left:var(--hairline) solid var(--rule);font-family:var(--mono);font-size:14px;
-  cursor:not-allowed}
+
+/* Pre-launch button reads as a live ink "Copy" button, then tells the truth on hover:
+   the label swaps to "Coming soon" and nothing is ever copied. Width is locked to the
+   wider of the two labels so the box does not resize mid-hover. */
+.btn-soon{min-width:124px;min-height:44px;padding:0 18px;background:var(--ink);color:var(--surface);
+  border:0;font-family:var(--mono);font-size:14px;cursor:not-allowed;
+  display:inline-flex;align-items:center;justify-content:center;position:relative}
+.btn-soon .lbl-copy,.btn-soon .lbl-soon{display:block;transition:opacity 120ms ease}
+.btn-soon .lbl-soon{position:absolute;opacity:0}
+.btn-soon:hover .lbl-copy,.btn-soon:focus-visible .lbl-copy{opacity:0}
+.btn-soon:hover .lbl-soon,.btn-soon:focus-visible .lbl-soon{opacity:1}
+/* Touch devices cannot hover, so they would never see the honest label.
+   Use pointer:coarse as well so headless/desktop engines that report hover:none
+   do not get the touch treatment. */
+@media (hover:none) and (pointer:coarse){
+  .btn-soon .lbl-copy{opacity:0}
+  .btn-soon .lbl-soon{opacity:1;position:static}
+}
+@media (prefers-reduced-motion:reduce){
+  .btn-soon .lbl-copy,.btn-soon .lbl-soon{transition:none}
+}
+
 .soon-note{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);opacity:0;
   transition:opacity 120ms ease}
 .copybox:hover .soon-note,.copybox:focus-within .soon-note{opacity:1}
 /* touch devices: always visible */
-@media (hover:none){.soon-note{opacity:1}}
+@media (hover:none) and (pointer:coarse){.soon-note{opacity:1}}
 @media (prefers-reduced-motion:reduce){.soon-note{transition:none}}
 
 /* waitlist */
@@ -134,11 +153,31 @@
 .split{display:grid;grid-template-columns:1fr 1fr;gap:var(--s7);align-items:start}
 @media (max-width:860px){.split{grid-template-columns:1fr;gap:var(--s6)}}
 
-/* The plaintext block ships with hard line breaks sized for a full-width column.
-   Inside .split the column is narrower, so pre-wrap re-wraps and orphans words.
-   Scroll instead of re-wrapping to keep the agent-facing text exactly as written. */
-.split .plaintext{white-space:pre;overflow-x:auto;max-width:100%}
-@media (max-width:860px){.split .plaintext{font-size:13px}}
+/* The plaintext block ships with hard line breaks: its longest line is 67 characters.
+   Inside the narrower .split column, pre-wrap re-wraps and orphans words, while plain
+   `pre` clips (Willie caught the clipping on 2026-09-22). Keep the authored line breaks
+   and size the type so all 67 characters sit squarely inside the box.
+   IBM Plex Mono advance width is 0.6em, so 67 chars need 40.2em. Sizing against the
+   container width (minus 36px padding) means the longest line always fits exactly. */
+.split .plaintext{white-space:pre;max-width:100%;overflow:hidden;
+  /* The pre is a direct grid child of .split, so size against the grid track itself.
+     67 chars of Plex Mono need 40.2em. The content column stops growing at --max-width,
+     so clamp the effective page width to that cap before halving, or the type keeps
+     scaling past 1168px and overflows the now-fixed track. */
+  --track: calc((min(100vw - 2 * var(--margin-desktop), var(--max-width)) - var(--s7)) / 2);
+  font-size:clamp(10px, calc((var(--track) - 40px) / 40.2), 14px)}
+/* Below ~1000px the two-column track would force the type under 10px to fit 67 chars.
+   Readability wins there: drop to one column early so the block gets full width. */
+@media (min-width:861px) and (max-width:1000px){
+  .split{grid-template-columns:1fr}
+  .split .plaintext{--track: calc(min(100vw - 2 * var(--margin-desktop), var(--max-width)))}
+}
+@media (max-width:860px){
+  /* single column below 860px: full width is available again */
+  .split .plaintext{
+    --track: calc(100vw - 2 * var(--margin-mobile));
+    font-size:min(14px, calc((var(--track) - 40px) / 40.2))}
+}
 
 /* why now rows */
 .whynow-row{display:grid;grid-template-columns:64px 1fr 1.6fr;gap:var(--s5);

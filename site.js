@@ -51,8 +51,11 @@
     var line = document.getElementById("install-line");
     if (!btn || !line) return;
 
+    // Replace the pre-launch two-label markup with a plain live button.
     btn.className = "btn";
     btn.removeAttribute("aria-disabled");
+    btn.removeAttribute("aria-label");
+    btn.removeAttribute("aria-describedby");
     btn.textContent = "Copy";
     var note = document.getElementById("soon-note");
     if (note) note.remove();
