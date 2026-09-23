@@ -370,7 +370,7 @@ Tell your human: AgentLive.Events is not live yet. They can join the waitlist at
 ## 7. Meta, accessibility and quality
 
 - `<title>`: `AgentLive.Events: Built for agents. Made for fans.` Why now page: `Why now: AgentLive.Events`.
-- Meta description, both pages: `AgentLive.Events is the ticket marketplace built for agents and made for fans: your agent finds the experience, you approve in one tap, and the tickets come to you.`
+- Meta description, both pages: `AgentLive.Events is the experience marketplace built for agents and made for fans: your agent finds the experience, you approve in one tap, and the tickets come to you.`
 - Open Graph and Twitter image: `favicon/social-share-1200x630.png`. Favicon set from the kit.
 - `lang="en"`, one `<h1>` per page, landmarks, a skip link.
 - Contrast already passes AA. Red never sits as text on ink.
